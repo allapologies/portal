@@ -1,3 +1,15 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+default:
+    pattern:      /
+    defaults:  { _controller: AppBundle:Default:index }
+
+gallery:
+    pattern:      /gallery
+    defaults:  { _controller: AppBundle:Gallery:index }
+
+mars:
+    pattern:      /mars
+    defaults:  { _controller: AppBundle:Mars:index }

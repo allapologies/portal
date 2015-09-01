@@ -2,16 +2,17 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Core;
 
-class DefaultController extends Controller
+class GalleryController extends Controller
 {
     public function indexAction(){
+        $images = $this->get('Flickr');
+        $num = $this->getParameter('imagenum');
+        $images = $images->loadimages($num);
         $html = $this->container->get('templating')->render(
-            'portal/portal.html.twig'
+            'portal/gallery.html.twig', ['images' => $images]
         );
 
         return new Response($html);
