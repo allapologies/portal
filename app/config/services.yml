@@ -11,3 +11,7 @@ services:
 # loadimages
    Flickr:
         class:     AppBundle\Gallery\Flickr
+
+   Rover:
+        class:     AppBundle\Rover\Rover
+        arguments: [x,y,pos]

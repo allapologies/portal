@@ -2,6 +2,7 @@
 namespace AppBundle\Gallery;
 use AppBundle\Core\Settings;
 use AppBundle\Core\CurlSingletone;
+use Symfony\Component\DependencyInjection\Container;
 
 class Flickr{
 
@@ -19,8 +20,8 @@ class Flickr{
      * @param $num
      * @return mixed
      */
-    public static function loadImages($num){
-        $url = Tools::createUrlRecent(Settings::APIKEY, $num);
+    public function loadImages($key, $num){
+        $url = Tools::createUrlRecent($key, $num);
         $curl = CurlSingletone::getInstance();
         $curl->open_connection();
 

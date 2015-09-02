@@ -10,7 +10,8 @@ class GalleryController extends Controller
     public function indexAction(){
         $images = $this->get('Flickr');
         $num = $this->getParameter('imagenum');
-        $images = $images->loadimages($num);
+        $key = $this->container->getParameter('apikey');
+        $images = $images->loadimages($key, $num);
         $html = $this->container->get('templating')->render(
             'portal/gallery.html.twig', ['images' => $images]
         );

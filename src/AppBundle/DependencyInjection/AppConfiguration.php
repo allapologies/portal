@@ -13,18 +13,18 @@ class AppConfiguration implements ConfigurationInterface
     $rootNode = $treeBuilder->root('app');
     $rootNode
         ->children()
-            ->scalarNode('URL')
+            ->scalarNode('url')
                 ->cannotBeEmpty()
             ->end()
-            ->scalarNode('APIKEY')   //PHPstorm exception: method is not found?
+            ->scalarNode('apikey')   //PHPstorm exception: method is not found?
                 ->cannotBeEmpty()
             ->end()
-            ->integerNode('NUMBER')->end()
-            ->scalarNode('FORMAT')->end()
-            ->integerNode('JSONP')
+            ->integerNode('number')->end()
+            ->scalarNode('format')->end()
+            ->integerNode('jsonp')
                 ->defaultValue(1)
             ->end()
-            ->scalarNode('LOG')->end()
+            ->scalarNode('log')->end()
         ->end()
     ;
 

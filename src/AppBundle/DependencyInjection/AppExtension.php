@@ -18,6 +18,6 @@ class AppExtension extends Extension
             $configuration,
             $configs
         );
-
+        $container->setParameter( 'apikey', $processedConfiguration['apikey']);
     }
 }

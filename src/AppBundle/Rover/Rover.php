@@ -6,17 +6,17 @@ use AppBundle\Core\Settings;
  * Class Rover describes model's behaviour
  *
  */
-class Rover extends ExploringMachine{
+class Rover{
     /**
      * @var int
      * Current position by X-axis
      */
-    protected $x_pos;
+    public $x_pos;
     /**
      * @var
      * Current position by Y-axis
      */
-    protected $y_pos;
+    public $y_pos;
     /**
      * @var
      * Current direction of Rover. Presented in an one-dimensional array and has two values
@@ -26,11 +26,7 @@ class Rover extends ExploringMachine{
      * South equals to [0, -1];
      * East equal to [1, 0];
      */
-    protected $direction;
-
-    public function __construct($x_pos, $y_pos, $direction){
-        parent::__construct($x_pos, $y_pos, $direction);
-    }
+    public $direction;
 
     /**
      * Function's call makes step forward the direction.
@@ -50,7 +46,7 @@ class Rover extends ExploringMachine{
      * inputs and returns an array regarding directions' model described above.
      */
     public function turnLeft(){
-        $temp = $this->array_swap($this->direction);
+        $temp = $this->arraySwap($this->direction);
         if ($this->direction[0] == 0 && $this->direction[1] == 1) {
             $temp[0] *= -1;
             $this->direction = $temp;
@@ -65,7 +61,7 @@ class Rover extends ExploringMachine{
      * inputs and returns an array regarding directions' model described above.
      */
     public function turnRight(){
-        $temp = $this->array_swap($this->direction);
+        $temp = $this->arraySwap($this->direction);
         if ($this->direction[0] == -1 && $this->direction[1] == 0) {
             $temp[1] *= -1;
             $this->direction = $temp;
@@ -80,7 +76,7 @@ class Rover extends ExploringMachine{
      * @return mixed
      * Function swaps array's values
      */
-    private function array_swap($array){
+    private function arraySwap($array){
         $temp = $array[0];
         $array[0] = $array[1];
         $array[1] = $temp;

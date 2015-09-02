@@ -83,9 +83,9 @@ swiftmailer:
 
 # Parameters
 app:
-    URL:    "%flickr_api%"
-    APIKEY: "%flickr_key%"
-    NUMBER: "%flickr_number_images%"
-    FORMAT: "%flickr_response_format%"
-    JSONP : "%flickr_jsonp%"
-    LOG   : "%app_log%"
+    url:    "%flickr_api%"
+    apikey: "%flickr_key%"
+    number: "%flickr_number_images%"
+    format: "%flickr_response_format%"
+    jsonp : "%flickr_jsonp%"
+    log   : "%app_log%"
