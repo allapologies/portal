@@ -35,6 +35,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        made_by: "%made_by%"
 
 # Assetic Configuration
 assetic:
@@ -78,3 +80,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Parameters
+app:
+    URL:    "%flickr_api%"
+    APIKEY: "%flickr_key%"
+    NUMBER: "%flickr_number_images%"
+    FORMAT: "%flickr_response_format%"
+    JSONP : "%flickr_jsonp%"
+    LOG   : "%app_log%"
