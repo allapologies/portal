@@ -3,8 +3,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Core\ReadfileSingletone;
 use AppBundle\Rover\Parser;
-use AppBundle\Rover\Rover;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
