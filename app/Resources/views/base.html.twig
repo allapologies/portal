@@ -37,10 +37,11 @@
     {% endblock footer %}
 
     {% block javascripts %}
-        <script src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset ('js/bootstrap.js') }}"></script>
-        <script src="{{ asset ('js/lightbox.js') }}"></script>
+        <script data-main="{{ asset('scripts/main') }}" src="{{ asset('scripts/require.js') }}"></script>
+        <!-- <script src="{{ asset('scripts/jquery-2.1.4.min.js') }}"></script>
+        <script src="{{ asset('scripts/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset ('scripts/bootstrap.js') }}"></script>
+        <script src="{{ asset ('scripts/lightbox.js') }}"></script> -->
     {% endblock %}
 </body>
 </html>

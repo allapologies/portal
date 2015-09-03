@@ -13,3 +13,7 @@ gallery:
 mars:
     pattern:      /mars
     defaults:  { _controller: AppBundle:Mars:index }
+
+menu:
+    pattern:      /menu/get
+    defaults:  { _controller: AppBundle:Menu:index }
