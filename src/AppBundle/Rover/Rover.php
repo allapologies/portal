@@ -29,6 +29,39 @@ class Rover{
     public $direction;
 
     /**
+     * @param $arr
+     * Direction setter
+     */
+    public function setDirection($arr){
+        $this->direction = $arr;
+    }
+
+    /**
+     * @return mixed
+     * Direction getter
+     */
+    public function getDirection(){
+        return $this->direction;
+    }
+
+    /**
+     * @return mixed
+     * Direction getter
+     */
+    public function getCurrentPosition(){
+        return [$this->x_pos, $this->y_pos];
+    }
+
+    /**
+     * @return mixed
+     * Direction getter
+     */
+    public function setCurrentPosition($arr){
+        $this->x_pos = $arr[0];
+        $this->y_pos = $arr[1];
+    }
+
+    /**
      * Function's call makes step forward the direction.
      * Step length needs to be set in Settings class.
      */
@@ -47,6 +80,10 @@ class Rover{
      */
     public function turnLeft(){
         $temp = $this->arraySwap($this->direction);
+        if (empty($temp)){
+            die('Zero value');
+        }
+
         if ($this->direction[0] == 0 && $this->direction[1] == 1) {
             $temp[0] *= -1;
             $this->direction = $temp;
