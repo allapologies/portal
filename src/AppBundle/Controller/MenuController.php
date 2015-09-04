@@ -7,10 +7,13 @@ use AppBundle\Core;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MenuController extends Controller
-{
+{	
+
 	public function indexAction(){
-	$response = ["code" => 100, "success" => true, "data"=> "<h2>Test</h2>"];
-	
-	return new JsonResponse($response); 
-	}      
+		$html = $this->container->get('templating')->render(
+			'portal/menu.html.twig'
+		);
+		
+		return new JsonResponse($html); 
+	}
 }
