@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/style_gallery.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
-
     {% endblock %}
 </head>
 <body>
@@ -23,7 +22,9 @@
             <h3 class="text-muted">{% block project %}{% endblock project %}</h3>
         </div>
     {% endblock header %}
+
     {% block content %}{% endblock content%}
+
     {% block footer %}
         <footer class="footer">
             <p>&copy; Aleksandr Panteleev</p>
