@@ -23,7 +23,7 @@ define(
 		};
 
 		$.when(ajax()).done(function(result) {
-			return result;
+			return {'result':result};
 		});
 
 		
