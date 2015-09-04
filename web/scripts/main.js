@@ -1,6 +1,6 @@
 requirejs.config({
 	
-	baseUrl: 'scripts',
+	baseUrl: 'scripts/lib',
 
 	shim : {
 		"bootstrap" : { "deps" :['jquery'] }
@@ -12,20 +12,32 @@ requirejs.config({
 		jqueryui: 'jquery-ui.min',
 		bootstrap: 'bootstrap',
 		lightbox: 'lightbox',
-		menu: 'menu'
+		menu: '../menu',
+		domReady: 'domReady'
 	   
 	}
 });
 
-requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'menu'],
-	 function   ($, _, jqueryui, bootstrap, lightbox, menu) {
+
+//This function is called once the DOM is ready.
+
+require(['domReady'], function (domReady) {
+	domReady(function(){
+		
+		//Menu loading
+
+		require(
+			['menu', 'jquery'],
+			function( menu, $ ){
+				$(".menu").html(menu);
+				$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
+			}
+		)
+
+	});
 });
 
-require(
-	['menu', 'jquery'],
-	function( menu, $ ){
-		$(".menu").html(menu);
-		$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
 
-	}
-)
+// requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'menu'],
+// 	 function   ($, _, jqueryui, bootstrap, lightbox, menu) {
+// });
