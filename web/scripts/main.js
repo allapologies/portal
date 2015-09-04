@@ -1,6 +1,10 @@
 requirejs.config({
     
-    baseUrl: 'scripts/lib',
+    baseUrl: 'scripts',
+
+    shim : {
+        "bootstrap" : { "deps" :['jquery'] }
+    },
 
     paths: {
         jquery: 'jquery-2.1.4.min',
@@ -8,10 +12,19 @@ requirejs.config({
         jqueryui: 'jquery-ui.min',
         bootstrap: 'bootstrap',
         lightbox: 'lightbox',
-        app: '../app'
+        menu: 'menu'
+       
     }
 });
 
-requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'app/menu'],
-    function   ($, _, jqueryui, bootstrap, lightbox, menu) {
+requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'menu'],
+     function   ($, _, jqueryui, bootstrap, lightbox, menu) {
 });
+
+
+require(
+    ['menu', 'jquery'],
+    function( menu, $ ){
+        $(".menu").text(menu);
+    }
+);
