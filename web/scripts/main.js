@@ -27,8 +27,8 @@ require(['domReady'], function (domReady) {
 		require(
 			['menu', 'jquery'],
 			function( menu, $ ){
-				$(".menu").html(menu.html);
-				$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
+				// $(".menu").html(menu.html);
+				// $(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
 			}
 		)
 
