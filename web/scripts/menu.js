@@ -18,6 +18,7 @@ define(
 						$(".menu").html(data.html);
 						$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
 					}
+
 					setMenu();
 
 				} else {
