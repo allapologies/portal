@@ -28,8 +28,8 @@ class Rover{
      */
     public $direction;
 
-    // public $x_edge;
-    // public $y_edge;
+    public $x_edge = [0,5];
+    public $y_edge = [0,5];
 
 
     /**
@@ -72,14 +72,14 @@ class Rover{
     public function move(){
 
         if ($this->direction[0]<>0){
-            if (($this->x_pos + Settings::STEP*$this->direction[0] > 5) || ($this->x_pos + Settings::STEP*$this->direction[0] < 0)){
+            if (($this->x_pos + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || ($this->x_pos + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
                 $this->direction[0]=$this->direction[0]*-1;
                 $this->x_pos += $this->direction[0] * Settings::STEP;
             } else {
                 $this->x_pos += $this->direction[0] * Settings::STEP;    
             }
             
-        } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > 5) || ($this->y_pos + Settings::STEP*$this->direction[1] < 0)){
+        } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || ($this->y_pos + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
             $this->direction[1]=$this->direction[1]*-1;
             $this->y_pos += $this->direction[1] * Settings::STEP;
          } else {
