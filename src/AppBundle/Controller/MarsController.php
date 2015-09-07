@@ -48,6 +48,13 @@ class MarsController extends Controller
         $rov->x_pos= $input[0];
         $rov->y_pos= $input[1];
         $rov->direction= $direct;
+        // $rov->x_edge = [0,5];
+        // $rov->y_edge = [0,5];
+
+        /**
+        * Handling edge crossings
+        */
+        // $plateau = new Field(5,5);
 
         $steps = Parser::parseMovements($input[3]);
 

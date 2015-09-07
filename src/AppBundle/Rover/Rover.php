@@ -11,7 +11,7 @@ class Rover{
      * @var int
      * Current position by X-axis
      */
-    public $x_pos;
+
     /**
      * @var
      * Current position by Y-axis
@@ -27,6 +27,10 @@ class Rover{
      * East equal to [1, 0];
      */
     public $direction;
+
+    // public $x_edge;
+    // public $y_edge;
+
 
     /**
      * @param $arr
@@ -68,8 +72,17 @@ class Rover{
     public function move(){
 
         if ($this->direction[0]<>0){
-            $this->x_pos += $this->direction[0] * Settings::STEP;
-        } else {
+            if (($this->x_pos + Settings::STEP*$this->direction[0] > 5) || ($this->x_pos + Settings::STEP*$this->direction[0] < 0)){
+                $this->direction[0]=$this->direction[0]*-1;
+                $this->x_pos += $this->direction[0] * Settings::STEP;
+            } else {
+                $this->x_pos += $this->direction[0] * Settings::STEP;    
+            }
+            
+        } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > 5) || ($this->y_pos + Settings::STEP*$this->direction[1] < 0)){
+            $this->direction[1]=$this->direction[1]*-1;
+            $this->y_pos += $this->direction[1] * Settings::STEP;
+         } else {
             $this->y_pos += $this->direction[1] * Settings::STEP;
         }
     }
