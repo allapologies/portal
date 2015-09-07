@@ -42,6 +42,6 @@ require(['domReady'], function (domReady) {
 	});
 });
 
-// requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'menu'],
-// 	 function   ($, _, jqueryui, bootstrap, lightbox, menu) {
-// });
+requirejs(['lightbox'],
+	function(lightbox) {
+});

@@ -14,7 +14,12 @@ define(
 			error: function() { console.log('Error with AJAX request')},
 			success: function(data){
 				if (isJSON(data)){
-					setMenu(data);
+					function setMenu(){
+						$(".menu").html(data.html);
+						$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
+					}
+					setMenu();
+
 				} else {
 					console.log("Response from server is not a correct JSON format")
 					
@@ -35,13 +40,15 @@ define(
 						
 						return false;
 					}
+				return true;
+
 			}
 			catch(e){
 				
-				return false;
+				$('.menu').text('Error loading menu.' +  e.name + ' ' + e.message);
+				// return false;
 			}
 
-			return true;
 		};
 
 	/**
@@ -52,3 +59,6 @@ define(
 		$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
 	};
 });
+
+
+
