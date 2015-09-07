@@ -30,7 +30,7 @@ define(
 			try {
 				var MyJSON = JSON.stringify(str);
 				var json = JSON.parse(MyJSON);
-				if(typeof(str) == 'string')
+				if(_.isString(str))
 					if(str.length == 0){
 						
 						return false;

@@ -23,8 +23,8 @@ require(['domReady'], function (domReady) {
 		
 		//Menu loading module
 		require(
-			['menu', 'jquery'],
-			function( menu, $ ){}
+			['menu', 'jquery', 'underscore'],
+			function( menu, $, _ ){}
 		)
 
 		//Text module loading
