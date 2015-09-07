@@ -14,6 +14,6 @@ class MenuController extends Controller
 			'portal/menu.html.twig'
 		);
 		
-		return new JsonResponse($html); 
+		return new JsonResponse(['html' => $html]); 
 	}
 }

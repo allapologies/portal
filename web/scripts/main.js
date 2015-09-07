@@ -9,35 +9,39 @@ requirejs.config({
 	paths: {
 		jquery: 'jquery-2.1.4.min',
 		underscore: 'underscore',
-		jqueryui: 'jquery-ui.min',
 		bootstrap: 'bootstrap',
 		lightbox: 'lightbox',
 		menu: '../menu',
-		domReady: 'domReady'
+		domReady: 'domReady',
+		text: '../text',
 	   
 	}
 });
 
-
-//This function is called once the DOM is ready.
-
 require(['domReady'], function (domReady) {
 	domReady(function(){
 		
-		//Menu loading
-
+		//Menu loading module
 		require(
-			['menu', 'jquery'],
-			function( menu, $ ){
-				$(".menu").html(menu);
-				$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
-			}
+			['menu', 'jquery', 'underscore'],
+			function( menu, $, _ ){}
 		)
 
+		//Text module loading
+		require(
+			['text', 'jquery'],
+			function( text, $ ){
+				
+				$("h4").on('click', function(){
+					var texter = new text($(this).text());
+					texter.setToUpperCase();
+					$(this).text(texter.getStr())
+				})
+			}
+		)
 	});
 });
 
-
-// requirejs(['jquery', 'underscore', 'jqueryui', 'bootstrap', 'lightbox', 'menu'],
-// 	 function   ($, _, jqueryui, bootstrap, lightbox, menu) {
-// });
+requirejs(['lightbox'],
+	function(lightbox) {
+});
