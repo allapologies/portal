@@ -1,6 +1,10 @@
 define(
 	["jquery"],
 
+	/**
+	*	Performs AJAX request to the backend
+	*	When response is succeed than calls a callback that appends menu to the DOM
+	*/
 	function($) {
 		$.ajax({
 			url: 'menu/get',
@@ -19,7 +23,9 @@ define(
 			}
 		});
 		
-
+		/**
+		*	Verifying if response has JSON format notation
+		*/
 		function isJSON(str){
 			try {
 				var MyJSON = JSON.stringify(str);
@@ -38,8 +44,11 @@ define(
 			return true;
 		};
 
-		function setMenu(obj){
-			$(".menu").html(obj.html);
-			$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
-		};
+	/**
+	*	Appends menu to the DOM and makes some animation
+	*/
+	function setMenu(obj){
+		$(".menu").html(obj.html);
+		$(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
+	};
 });

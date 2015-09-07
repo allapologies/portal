@@ -12,26 +12,33 @@ requirejs.config({
 		bootstrap: 'bootstrap',
 		lightbox: 'lightbox',
 		menu: '../menu',
-		domReady: 'domReady'
+		domReady: 'domReady',
+		text: '../text',
 	   
 	}
 });
 
-//This function is called once the DOM is ready.
-
 require(['domReady'], function (domReady) {
 	domReady(function(){
 		
-		//Menu loading
-
+		//Menu loading module
 		require(
 			['menu', 'jquery'],
-			function( menu, $ ){
-				// $(".menu").html(menu.html);
-				// $(".menu").fadeTo('fast',0).fadeTo('fast',1).fadeTo('fast',0).fadeTo('fast',1);
-			}
+			function( menu, $ ){}
 		)
 
+		//Text module loading
+		require(
+			['text', 'jquery'],
+			function( text, $ ){
+				
+				$("h4").on('click', function(){
+					var texter = new text($(this).text());
+					texter.setToUpperCase();
+					$(this).text(texter.getStr())
+				})
+			}
+		)
 	});
 });
 
