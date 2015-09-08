@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MenuController extends Controller
 {	
-
 	public function indexAction(){
 		$html = $this->container->get('templating')->render(
 			'portal/menu.html.twig'

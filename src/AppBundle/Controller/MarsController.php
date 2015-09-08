@@ -34,12 +34,8 @@ class MarsController extends Controller
         if ($form->isValid()) {
             $data = $form->getData();
             
-            // return $this->redirectToRoute('mars');            
+            return $this->redirectToRoute('mars');            
         }
-
-
-
-
 
         /**
          * TODO handle wrong input data error
