@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style_gallery.css') }}" />
+{% endblock stylesheets %}
+
+{% block title %}
+    Picturesque Gallery
+{% endblock %}
+
+{% block project %}
+    Picturesque Gallery
+{% endblock project %}
+
+{% block content %}
+        <div class = "jumbotron">
+            <h2>Nice Gallery with Symfony framework</h2>
+            <table class = "table">
+                <th>Image</th><th>Title</th><th>Profile</th>
+                {% for image in images %}
+                    <tr>
+                        <td>
+                            <a href="{{ image.url }}" data-lightbox="{{ image.id }}" data-title="{{ image.title }}">
+                                <img src="{{ image.thumbnail }}">
+                            </a>
+                        </td>
+                        <td>
+                            {{ image.title }}
+                        </td>
+
+                        <td>
+                            <a href="{{ image.profile }}" target=_blank>
+                                <span>i</span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+{% endblock content %}

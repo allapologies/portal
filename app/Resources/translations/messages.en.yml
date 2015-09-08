@@ -1,0 +1,4 @@
+portal.2.app: Portal with 2 applications
+nice.gallery.with.symfony.framework: Nice Gallery with Symfony framework
+this.is.done.by.with.using.service.container.parameters: This is done with using Service Container Parameters
+invalid.api.key : Invalid API Key. The API key passed was not valid or has expired.

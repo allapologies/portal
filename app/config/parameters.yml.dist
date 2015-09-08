@@ -1,0 +1,19 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 6f4503694f0329d68011a268fc180bcf346469dd
+    imagenum: 5
+    made_by: Aleksandr Panteleev
+    flickr_api: https://api.flickr.com/services/rest/?
+    flickr_key: b247b4c43ca75d1e2825bd325705e4bd
+    flickr_number_images: 1
+    flickr_response_format: json
+    flickr_jsonp: 1
+    app_log: application/logs/errors.log
