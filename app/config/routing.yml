@@ -17,3 +17,7 @@ mars:
 menu:
     pattern:      /menu/get
     defaults:  { _controller: AppBundle:Menu:index }
+
+registration:
+    pattern:      /registration
+    defaults:  { _controller: AppBundle:Registration:index }
