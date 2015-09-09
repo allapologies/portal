@@ -6,10 +6,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Core;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class RegistrationController extends Controller
 {
-    public function indexAction(){
+    public function indexAction(Request $request){
         
     	$form = $this->createFormBuilder()
             ->add('Login:', 'text', array(
@@ -38,6 +40,15 @@ class RegistrationController extends Controller
         $html = $this->container->get('templating')->render(
             'portal/registration.html.twig', ['form' => $form->createView()]
         );
+
+        $form->handleRequest($request);
+
+	    if ($form->isValid()) {
+	        // perform some action, such as saving the task to the database
+
+	        return $this->redirectToRoute('home');
+
+	    }
 
         return new Response($html);
     }
