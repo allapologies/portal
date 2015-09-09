@@ -102,5 +102,5 @@ lunetics_locale:
         - ru
         - de
     switcher:
-        template: AppBundle:mytemplate.html.twig
+        # template: AppBundle:mytemplate.html.twig
         show_current_locale: false
