@@ -2,3 +2,4 @@ portal.2.app: Portal mit 2 Anwendungen
 nice.gallery.with.symfony.framework: Nizza Galerie mit Symfony Framework
 this.is.done.by.with.using.service.container.parameters: Dies wird mit der Verwendung von Service ContainerParameter durchgeführt
 invalid.api.key : Ungültige API Key. Die APISchlüssel übergeben war ungültig oder abgelaufen ist.
+please.register:  Bitte registrieren
