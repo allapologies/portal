@@ -12,21 +12,24 @@ class RoverTurnsTest extends \PHPUnit_Framework_TestCase
 		
 		$testRover = new Rover;
 		$testRover->setDirection($dir);
-	    $testRover->setCurrentPosition($x,$y);
+	    $testRover->setCurrentPosition($posCurrent);
 		$testRover->move();
 
 		$this->assertEquals(
-			$pos, $testRover->getCurrentPosition()
+			$posNew, $testRover->getCurrentPosition()
 		);
 	}
 
 	public function moveProvider()
     {
         return [
-            'north' => [[0, 1], [-1, 0],  ],
-            'west'  => [[-1, 0], [0,-1]],
-            'south' => [[0, -1], [1, 0]],
-            'east'  => [[1, 0], [0,1]]
+            'Move North' => [[0, 1], [1, 1], [1, 2]],
+            'Move West'  => [[-1, 0], [3, 3], [2, 3]],
+            'Move South' => [[0, -1], [4, 3], [4, 2]],
+            'Move East'  => [[1, 0], [3,3], [4, 3]],
+            'Face with edge x_axis'  => [[1, 0], [3,3], [4, 3]],
+            'Face with edge y_axis'  => [[1, 0], [3,3], [4, 3]],
+            'Bad direction' => [[1, 1], [1, 1], [1, 2]],
         ];
     }
 }

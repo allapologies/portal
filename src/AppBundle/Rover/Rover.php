@@ -28,9 +28,12 @@ class Rover{
      */
     public $direction;
 
+
+    public $coordinates= [[0, 1],[-1, 0], [0, -1], [1, 0]];
+
+
     public $x_edge = [0,5];
     public $y_edge = [0,5];
-
 
     /**
      * @param $arr
@@ -71,24 +74,27 @@ class Rover{
      */
     public function move(){
 
-        if ($this->direction[0]<>0){
-            if (($this->x_pos + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
-                ($this->x_pos + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
-                
-                $this->direction[0]=$this->direction[0]*-1;
-                $this->x_pos += $this->direction[0] * Settings::STEP;
-            } else {
-                $this->x_pos += $this->direction[0] * Settings::STEP;    
-            }
-            
-        } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
-                ($this->y_pos + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
+        if (in_array($this->direction, $this->coordinates)){
 
-                $this->direction[1]=$this->direction[1]*-1;
-                $this->y_pos += $this->direction[1] * Settings::STEP;
-             } else {
-                $this->y_pos += $this->direction[1] * Settings::STEP;
-            }
+            if ($this->direction[0]<>0){
+                if (($this->x_pos + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
+                    ($this->x_pos + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
+                    
+                    $this->direction[0]=$this->direction[0]*-1;
+                    $this->x_pos += $this->direction[0] * Settings::STEP;
+                } else {
+                    $this->x_pos += $this->direction[0] * Settings::STEP;    
+                }
+                
+            } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
+                    ($this->y_pos + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
+
+                    $this->direction[1]=$this->direction[1]*-1;
+                    $this->y_pos += $this->direction[1] * Settings::STEP;
+                 } else {
+                    $this->y_pos += $this->direction[1] * Settings::STEP;
+                }
+        } else throw new \Exception("Wrong direction", 1);
     }
 
     /**
