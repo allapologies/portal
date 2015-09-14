@@ -8,21 +8,16 @@ use AppBundle\Core\Settings;
  */
 class Rover{
     function __construct($position, $direction) {
-        $this->setCurrentPosition($position, $direction);
-        $this->setDirection($direction);
+        $this->position = $position;
+        $this->direction = $direction;
    }
 
     /**
-     * @var int
-     * Current position by X-axis
+     * @var array
+     * Current position by X and Y-axis
      */
-    public $x_pos;
+    public $position;
 
-    /**
-     * @var
-     * Current position by Y-axis
-     */
-    public $y_pos;
     /**
      * @var
      * Current direction of Rover. Presented in an one-dimensional array and has two values
@@ -62,16 +57,15 @@ class Rover{
      * Direction getter
      */
     public function getCurrentPosition(){
-        return [$this->x_pos, $this->y_pos];
+        return $this->position;
     }
 
     /**
      * @return mixed
      * Direction getter
      */
-    public function setCurrentPosition($arr){
-        $this->x_pos = $arr[0];
-        $this->y_pos = $arr[1];
+    public function setCurrentPosition($position){
+        $this->position = $position;
     }
 
     /**
@@ -83,22 +77,22 @@ class Rover{
         if (in_array($this->direction, $this->coordinates)){
 
             if ($this->direction[0]<>0){
-                if (($this->x_pos + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
-                    ($this->x_pos + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
+                if (($this->position[0] + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
+                    ($this->position[0] + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
                     
                     $this->direction[0]=$this->direction[0]*-1;
-                    $this->x_pos += $this->direction[0] * Settings::STEP;
+                    $this->position[0] = $this->position[0]+ $this->direction[0] * Settings::STEP;
                 } else {
-                    $this->x_pos += $this->direction[0] * Settings::STEP;    
+                    $this->position[0] = $this->position[0]+ $this->direction[0] * Settings::STEP;
                 }
                 
-            } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
-                    ($this->y_pos + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
+            } elseif (($this->position[1] + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
+                    ($this->position[1] + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
 
-                    $this->direction[1]=$this->direction[1]*-1;
-                    $this->y_pos += $this->direction[1] * Settings::STEP;
+                    $this->direction[1]=$this->direction[1] * -1;
+                    $this->position[1] = $this->position[1] + $this->direction[1] * Settings::STEP;
                  } else {
-                    $this->y_pos += $this->direction[1] * Settings::STEP;
+                    $this->position[1] = $this->position[1] + $this->direction[1] * Settings::STEP;
                 }
         } else throw new \Exception("Wrong direction", 1);
     }
@@ -159,6 +153,6 @@ class Rover{
             case [0, -1]: $this->direction = "S"; break;
             case [1, 0]: $this->direction = "E"; break;
         }
-        return "$this->x_pos $this->y_pos $this->direction";
+        return implode (" ", $this->position) . " $this->direction";
     }
 }

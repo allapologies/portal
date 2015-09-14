@@ -6,6 +6,8 @@ use AppBundle\Rover\Parser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Rover\Rover;
+
 
 
 class MarsController extends Controller
@@ -21,21 +23,6 @@ class MarsController extends Controller
          * TODO handle reading error exception
          */
         $input = $file->readFile(__DIR__.'/../input/input.data');
-
-        
-        // createFormBuilder is a shortcut to get the "form factory"
-        // and then call "createBuilder()" on it
-        $form = $this->createFormBuilder()
-            ->add('Input', 'text')
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $data = $form->getData();
-            
-            return $this->redirectToRoute('mars');            
-        }
 
         /**
          * TODO handle wrong input data error
@@ -61,10 +48,11 @@ class MarsController extends Controller
          */
 
 
-        $rov = $this->get('Rover');
-        $rov->x_pos= $input[0];
-        $rov->y_pos= $input[1];
-        $rov->direction= $direct;
+        //$rov = $this->get('Rover');
+        $rov = new Rover([$input[0],$input[1]], $direct);
+        // $rov->position[0]= $input[0];
+        // $rov->position[1]= $input[1];
+        // $rov->direction= $direct;
 
         $steps = Parser::parseMovements($input[3]);
 
@@ -86,7 +74,7 @@ class MarsController extends Controller
         $position = $rov->getPosition();
 
         $html = $this->container->get('templating')->render(
-            'portal/mars.html.twig', ['position' => $position, 'form' => $form->createView()]
+            'portal/mars.html.twig', ['position' => $position]
         );
 
         return new Response($html);
