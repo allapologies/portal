@@ -13,6 +13,7 @@ class RoverTurnsTest extends \PHPUnit_Framework_TestCase
         $testRover->setDirection([$x, $y]);
         $testRover->turnLeft();
         $this->assertEquals($pos, $testRover->getDirection());
+        
         return $testRover->getDirection();
     }
 
@@ -36,6 +37,7 @@ class RoverTurnsTest extends \PHPUnit_Framework_TestCase
         $testRover->setDirection([$x, $y]);
         $testRover->turnRight();
         $this->assertEquals($pos, $testRover->getDirection());
+        
         return $testRover->getDirection();
     }
 

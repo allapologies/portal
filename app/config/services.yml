@@ -14,4 +14,4 @@ services:
 
    Rover:
         class:     AppBundle\Rover\Rover
-        arguments: [x,y,pos]
+        arguments: [pos,dir]

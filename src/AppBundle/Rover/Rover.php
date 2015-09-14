@@ -7,10 +7,16 @@ use AppBundle\Core\Settings;
  *
  */
 class Rover{
+    function __construct($position, $direction) {
+        $this->setCurrentPosition($position, $direction);
+        $this->setDirection($direction);
+   }
+
     /**
      * @var int
      * Current position by X-axis
      */
+    public $x_pos;
 
     /**
      * @var
