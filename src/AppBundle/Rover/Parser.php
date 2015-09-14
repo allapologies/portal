@@ -3,6 +3,7 @@ namespace AppBundle\Rover;
 
 class Parser
 {
+    
     /**
      * Field dimensions ^\s*(\d+)\s+(\d+)\s*$
      * @param $str
@@ -21,9 +22,13 @@ class Parser
      */
     static function parseStart($str){
         preg_match_all('/^\s*(\d+)\s+(\d+)\s*([nesw])\s*([lmr]+)$/im', $str, $out);
-        $roversnum = count($out[0]);
-        return [$out[1][0], $out[2][0], $out[3][0], $out[4][0]] ;
+        if (!in_array(strtolower($out[3][0]), ['n','e','w','s'])){
+            return [$out[1][0], $out[2][0], $out[3][0], $out[4][0]];
+        } else {
+            throw new RoverException("Error Processing Request");
+        }
     }
+
 
     /**
      * @param $str

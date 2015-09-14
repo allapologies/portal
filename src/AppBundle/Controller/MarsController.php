@@ -6,6 +6,8 @@ use AppBundle\Rover\Parser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Rover\Rover;
+
 
 
 class MarsController extends Controller
@@ -22,26 +24,14 @@ class MarsController extends Controller
          */
         $input = $file->readFile(__DIR__.'/../input/input.data');
 
-        
-        // createFormBuilder is a shortcut to get the "form factory"
-        // and then call "createBuilder()" on it
-        $form = $this->createFormBuilder()
-            ->add('Input', 'text')
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $data = $form->getData();
-            
-            return $this->redirectToRoute('mars');            
-        }
-
         /**
          * TODO handle wrong input data error
          */
-        $input = Parser::parseStart($input);
-
+        try {
+            $input = Parser::parseStart($input);
+        } catch (RoverException $e){
+            $e->logReport();
+        }
         /**
          * TODO implement creation of multiple objects
          */
@@ -50,33 +40,33 @@ class MarsController extends Controller
         /**
          * TODO implement bindings between geo and math coordinates in Coordinates Class
          */
+        
         switch ($direct){
             case "n": $direct = [0, 1]; break;
             case "w": $direct = [-1, 0]; break;
             case "s": $direct = [0, -1]; break;
             case "e": $direct = [1, 0]; break;
         }
+
         /**
          * Creation new class instance
          */
-
-
-        $rov = $this->get('Rover');
-        $rov->x_pos= $input[0];
-        $rov->y_pos= $input[1];
-        $rov->direction= $direct;
-
+        $rov = new Rover([$input[0],$input[1]], $direct);
         $steps = Parser::parseMovements($input[3]);
-
+        
         /**
          * TODO  ?? relocate to move method
          */
-        foreach ($steps as $step) {
-            switch ($step) {
-                case "L": $rov->turnLeft(); break;
-                case "R": $rov->turnRight(); break;
-                case "M": $rov->move(); break;
+        try {
+            foreach ($steps as $step) {
+                switch ($step) {
+                    case "L": $rov->turnLeft(); break;
+                    case "R": $rov->turnRight(); break;
+                    case "M": $rov->move(); break;
+                }
             }
+        } catch (RoverException $e) {
+            echo 'Выброшено исключение: ', $e->logReport(); 
         }
 
 
@@ -86,7 +76,7 @@ class MarsController extends Controller
         $position = $rov->getPosition();
 
         $html = $this->container->get('templating')->render(
-            'portal/mars.html.twig', ['position' => $position, 'form' => $form->createView()]
+            'portal/mars.html.twig', ['position' => $position]
         );
 
         return new Response($html);

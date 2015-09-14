@@ -8,21 +8,16 @@ use AppBundle\Core\Settings;
  */
 class Rover{
     function __construct($position, $direction) {
-        $this->setCurrentPosition($position, $direction);
-        $this->setDirection($direction);
+        $this->position = $position;
+        $this->direction = $direction;
    }
 
     /**
-     * @var int
-     * Current position by X-axis
+     * @var array
+     * Current position by X and Y-axis
      */
-    public $x_pos;
+    public $position;
 
-    /**
-     * @var
-     * Current position by Y-axis
-     */
-    public $y_pos;
     /**
      * @var
      * Current direction of Rover. Presented in an one-dimensional array and has two values
@@ -62,16 +57,15 @@ class Rover{
      * Direction getter
      */
     public function getCurrentPosition(){
-        return [$this->x_pos, $this->y_pos];
+        return $this->position;
     }
 
     /**
      * @return mixed
      * Direction getter
      */
-    public function setCurrentPosition($arr){
-        $this->x_pos = $arr[0];
-        $this->y_pos = $arr[1];
+    public function setCurrentPosition($position){
+        $this->position = $position;
     }
 
     /**
@@ -79,55 +73,52 @@ class Rover{
      * Step length needs to be set in Settings class.
      */
     public function move(){
-
         if (in_array($this->direction, $this->coordinates)){
-
-            if ($this->direction[0]<>0){
-                if (($this->x_pos + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
-                    ($this->x_pos + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
-                    
-                    $this->direction[0]=$this->direction[0]*-1;
-                    $this->x_pos += $this->direction[0] * Settings::STEP;
-                } else {
-                    $this->x_pos += $this->direction[0] * Settings::STEP;    
+        if ($this->direction[0]<>0){
+                if (($this->position[0] + Settings::STEP*$this->direction[0] > $this->x_edge[1]) || 
+                    ($this->position[0] + Settings::STEP*$this->direction[0] < $this->x_edge[0])){
+                    $this->direction[0]=$this->direction[0] * -1;
                 }
-                
-            } elseif (($this->y_pos + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
-                    ($this->y_pos + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
 
-                    $this->direction[1]=$this->direction[1]*-1;
-                    $this->y_pos += $this->direction[1] * Settings::STEP;
-                 } else {
-                    $this->y_pos += $this->direction[1] * Settings::STEP;
+                $this->position[0] = $this->position[0]+ $this->direction[0] * Settings::STEP;
+            } elseif (($this->position[1] + Settings::STEP*$this->direction[1] > $this->y_edge[1]) || 
+                     ($this->position[1] + Settings::STEP*$this->direction[1] < $this->y_edge[0])){
+
+                    $this->direction[1]=$this->direction[1] * -1;
                 }
-        } else throw new \Exception("Wrong direction", 1);
-    }
+
+                $this->position[1] = $this->position[1] + $this->direction[1] * Settings::STEP;
+                }
+                else throw new RoverException("Wrong direction", 1);
+        }
+
 
     /**
      * Function's call pivots the motion vector on 90 degrees counterclockwise
      * inputs and returns an array regarding directions' model described above.
      */
     public function turnLeft(){
-        $temp = $this->arraySwap($this->direction);
-        if (empty($temp)){
-            die('Zero value');
-        }
+        
+        if (in_array($this->direction, $this->coordinates)){
 
-        if ($this->direction[0] == 0 && $this->direction[1] == 1) {
-            $temp[0] *= -1;
-            $this->direction = $temp;
-        } elseif ($this->direction[0] == 0 && $this->direction[1] == -1) {
-            $temp[0] *= -1;
-            $this->direction = $temp;
-        } else $this->direction = $temp;
-    }
+        $temp = $this->arraySwap($this->direction);
+            if ($this->direction[0] == 0 && $this->direction[1] == 1) {
+                $temp[0] *= -1;
+                $this->direction = $temp;
+            } elseif ($this->direction[0] == 0 && $this->direction[1] == -1) {
+                $temp[0] *= -1;
+                $this->direction = $temp;
+                } else $this->direction = $temp;
+            } else throw new RoverException("Wrong direction", 1);
+        }
 
     /**
      * Function's call pivots the motion vector on 90 degrees clockwise
      * inputs and returns an array regarding directions' model described above.
      */
     public function turnRight(){
-        $temp = $this->arraySwap($this->direction);
+        if (in_array($this->direction, $this->coordinates)){
+            $temp = $this->arraySwap($this->direction);
         if ($this->direction[0] == -1 && $this->direction[1] == 0) {
             $temp[1] *= -1;
             $this->direction = $temp;
@@ -135,6 +126,7 @@ class Rover{
             $temp[1] *= -1;
             $this->direction = $temp;
         } else $this->direction = $temp;
+        } else throw new \Exception("Wrong direction", 1);
     }
 
     /**
@@ -159,6 +151,6 @@ class Rover{
             case [0, -1]: $this->direction = "S"; break;
             case [1, 0]: $this->direction = "E"; break;
         }
-        return "$this->x_pos $this->y_pos $this->direction";
+        return implode (" ", $this->position) . " $this->direction";
     }
 }

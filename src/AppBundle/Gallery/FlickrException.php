@@ -16,8 +16,8 @@ class FlickrException extends \Exception{
         echo "Code number" . $this->code;
     }
 
-    public function writeMessage(){
-        $file = Settings::LOG;
+    public function logReport(){
+        $file = 'application/logs/errors.log';
         $error = "Error code: $this->code, $this->message \n";
         file_put_contents($file, $error, FILE_APPEND | LOCK_EX);
     }
