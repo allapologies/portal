@@ -27,8 +27,11 @@ class MarsController extends Controller
         /**
          * TODO handle wrong input data error
          */
-        $input = Parser::parseStart($input);
-
+        try {
+            $input = Parser::parseStart($input);
+        } catch (RoverException $e){
+            $e->logReport();
+        }
         /**
          * TODO implement creation of multiple objects
          */
@@ -37,34 +40,33 @@ class MarsController extends Controller
         /**
          * TODO implement bindings between geo and math coordinates in Coordinates Class
          */
+        
         switch ($direct){
             case "n": $direct = [0, 1]; break;
             case "w": $direct = [-1, 0]; break;
             case "s": $direct = [0, -1]; break;
             case "e": $direct = [1, 0]; break;
         }
+
         /**
          * Creation new class instance
          */
-
-
-        //$rov = $this->get('Rover');
         $rov = new Rover([$input[0],$input[1]], $direct);
-        // $rov->position[0]= $input[0];
-        // $rov->position[1]= $input[1];
-        // $rov->direction= $direct;
-
         $steps = Parser::parseMovements($input[3]);
-
+        
         /**
          * TODO  ?? relocate to move method
          */
-        foreach ($steps as $step) {
-            switch ($step) {
-                case "L": $rov->turnLeft(); break;
-                case "R": $rov->turnRight(); break;
-                case "M": $rov->move(); break;
+        try {
+            foreach ($steps as $step) {
+                switch ($step) {
+                    case "L": $rov->turnLeft(); break;
+                    case "R": $rov->turnRight(); break;
+                    case "M": $rov->move(); break;
+                }
             }
+        } catch (RoverException $e) {
+            echo 'Выброшено исключение: ', $e->logReport(); 
         }
 
 

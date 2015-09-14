@@ -106,5 +106,4 @@ class RoverTest extends \PHPUnit_Framework_TestCase
             'second case' => [[1,2], [0,1], ["L","M","L","M","L","M","L","M","M"], [1,3], [0,1]],
         ];
     }
-
 }
