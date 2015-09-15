@@ -25,10 +25,9 @@ class Parser
         if (!in_array(strtolower($out[3][0]), ['n','e','w','s'])){
             return [$out[1][0], $out[2][0], $out[3][0], $out[4][0]];
         } else {
-            throw new RoverException("Error Processing Request");
+            throw new RoverException('Error Processing Request', 100);
         }
     }
-
 
     /**
      * @param $str

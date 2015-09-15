@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Rover\Rover;
 
-
-
 class MarsController extends Controller
 {
     public function indexAction(Request $request){
@@ -29,8 +27,9 @@ class MarsController extends Controller
          */
         try {
             $input = Parser::parseStart($input);
-        } catch (RoverException $e){
-            $e->logReport();
+        } catch (\AppBundle\Rover\RoverException $e){
+            $e->logGeneralReport();
+            $e->logAdminReport();
         }
         /**
          * TODO implement creation of multiple objects
